@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">वाहन पार्किंग स्पॉट</string>
+    <string name="select_language">भाषा चुनें</string>
+    <string name="language_english">अंग्रे़ी</string>
+    <string name="language_hindi">हिंदी</string>
+    <string name="change_language">भाषा बदलें</string>
+    <string name="language_changed">भाषा बदल दी गई है</string>
+</resources> 
