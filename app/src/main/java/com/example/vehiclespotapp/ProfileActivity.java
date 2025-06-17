@@ -61,24 +61,16 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Set up dropdowns
         String[] genderOptions = {"Male", "Female", "Other"};
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, genderOptions);
-        genderEdit.setAdapter(genderAdapter);
-        genderEdit.setDropDownHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+        genderEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, genderOptions));
 
-        String[] countryOptions = {"India", "United States", "United Kingdom", "Canada", "Australia", "Other"};
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, countryOptions);
-        countryEdit.setAdapter(countryAdapter);
-        countryEdit.setDropDownHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+        String[] countryOptions = {"India", "United States", "United Kingdom", "Canada", "Australia"};
+        countryEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, countryOptions));
 
-        String[] stateOptions = {"Gujarat", "Maharashtra", "California", "Texas", "New York", "Other"};
-        ArrayAdapter<String> stateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, stateOptions);
-        stateEdit.setAdapter(stateAdapter);
-        stateEdit.setDropDownHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+        String[] stateOptions = {"Gujarat", "Maharashtra", "California", "Texas", "New York"};
+        stateEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, stateOptions));
 
-        String[] cityOptions = {"Ahmedabad", "Mumbai", "Los Angeles", "Houston", "New York City", "Other"};
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, cityOptions);
-        cityEdit.setAdapter(cityAdapter);
-        cityEdit.setDropDownHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+        String[] cityOptions = {"Ahmedabad", "Mumbai", "Los Angeles", "Houston", "New York City"};
+        cityEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, cityOptions));
 
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         // Load saved values

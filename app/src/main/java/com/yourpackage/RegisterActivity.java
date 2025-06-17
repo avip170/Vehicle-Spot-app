@@ -1,5 +1,3 @@
-package com.example.vehiclespotapp;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -9,11 +7,37 @@ import android.widget.Toast;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-public class RegisterActivity extends AppCompatActivity {
+
+import com.example.vehiclespotapp.R;
+import com.example.vehiclespotapp.OTPVerificationActivity;
+import com.example.vehiclespotapp.LoginActivity;
+// Make sure your package declaration at the top of this file is correct,
+// e.g., package com.yourpackage;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import android.widget.EditText;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.content.Intent;
+import android.content.SharedPreferences;
+
+// This includes the earlier correct import: import com.example.vehiclespotapp.R;
+// And other imports up to line 20.
+import android.content.SharedPreferences; // This was line 20 in the original file (itself a duplicate of an earlier import)
+
+// The following lines (originally 22-27) have been removed:
+// // Replace this incorrect import:
+// // import com.yourpackage.R;
+// // With the correct import using your actual applicationId:
+// import com.your.actual.applicationid.R; // <-- MODIFIED LINE: Use your actual applicationId here
+
+public class RegisterActivity extends AppCompatActivity { // This was originally line 28
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register); // This R should now resolve correctly
 
         EditText firstName = findViewById(R.id.editTextFirstName);
         EditText lastName = findViewById(R.id.editTextLastName);
@@ -62,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .apply();
 
             // Proceed to OTP verification or next step
-            Intent intent = new Intent(this, OTPVerificationActivity.class);
+            Intent intent = new Intent(this, com.example.vehiclespotapp.OTPVerificationActivity.class);
             intent.putExtra("phone_number", phoneStr);
             startActivity(intent);
             finish();

@@ -4,21 +4,40 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
-    private Button loginButton;
-    private TextView registerLink, forgotPasswordLink;
+    private Button loginButton, googleSignInButton;
+    private TextView forgotPasswordText, registerText;
+    private GoogleSignInClient googleSignInClient;
+    private static final int RC_SIGN_IN = 9001;
+
+    private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+            handleSignInResult(task);
+        }
+    );
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         boolean isLoggedIn = prefs.getBoolean("is_logged_in", false);
@@ -29,95 +48,121 @@ public class LoginActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_login);
 
+        // Initialize views
+        initializeViews();
+
+        // Configure Google Sign-In
+        configureGoogleSignIn();
+
+        // Set up click listeners
+        setupClickListeners();
+    }
+
+    private void initializeViews() {
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.buttonLogin);
-        registerLink = findViewById(R.id.textRegister);
-        forgotPasswordLink = findViewById(R.id.forgotPasswordLink);
+        googleSignInButton = findViewById(R.id.buttonGoogleSignIn);
+        forgotPasswordText = findViewById(R.id.textForgotPassword);
+        registerText = findViewById(R.id.textRegister);
+    }
 
-        loginButton.setOnClickListener(v -> attemptLogin());
-        registerLink.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
-            finish();
-        });
-        forgotPasswordLink.setOnClickListener(v -> {
+    private void configureGoogleSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestId()
+                .requestProfile()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
+
+    private void setupClickListeners() {
+        loginButton.setOnClickListener(v -> performLogin());
+        googleSignInButton.setOnClickListener(v -> signInWithGoogle());
+        forgotPasswordText.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+        });
+        registerText.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
     }
 
-    private void attemptLogin() {
+    private void performLogin() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
+        // Check credentials from SharedPreferences
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        String regEmail = prefs.getString("email", null);
-        String regPassword = prefs.getString("password", null);
-        if (regEmail == null || regPassword == null) {
-            Toast.makeText(this, "No user registered. Please register first.", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            finish();
+        String savedEmail = prefs.getString("email", "");
+        String savedPassword = prefs.getString("password", "");
+        boolean isVerified = prefs.getBoolean("is_verified", false);
+
+        if (!isVerified) {
+            Toast.makeText(this, "Please verify your email first", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (email.equals(regEmail) && password.equals(regPassword)) {
-            // Login success
+
+        if (email.equals(savedEmail) && password.equals(savedPassword)) {
+            // Save login state
             prefs.edit().putBoolean("is_logged_in", true).apply();
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            
+            // Proceed to main activity
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         } else {
             Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void showForgotPasswordDialog() {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setTitle("Reset Password");
+    private void signInWithGoogle() {
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        signInLauncher.launch(signInIntent);
+    }
 
-        // Set up the input fields
-        android.widget.LinearLayout layout = new android.widget.LinearLayout(this);
-        layout.setOrientation(android.widget.LinearLayout.VERTICAL);
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            // Signed in successfully
+            handleSuccessfulGoogleSignIn(account);
+        } catch (ApiException e) {
+            // Sign in failed
+            Toast.makeText(this, "Google Sign-In failed: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
-        final android.widget.EditText emailInput = new android.widget.EditText(this);
-        emailInput.setHint("Registered Email");
-        layout.addView(emailInput);
+    private void handleSuccessfulGoogleSignIn(GoogleSignInAccount account) {
+        // Save user information
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        prefs.edit()
+            .putString("email", account.getEmail())
+            .putString("first_name", account.getGivenName())
+            .putString("last_name", account.getFamilyName())
+            .putString("profile_pic", account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "")
+            .putBoolean("is_verified", true)
+            .putBoolean("is_logged_in", true)
+            .apply();
 
-        final android.widget.EditText newPasswordInput = new android.widget.EditText(this);
-        newPasswordInput.setHint("New Password");
-        newPasswordInput.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        layout.addView(newPasswordInput);
+        // Show success message
+        Toast.makeText(this, "Welcome, " + account.getDisplayName(), Toast.LENGTH_SHORT).show();
 
-        builder.setView(layout);
+        // Proceed to main activity
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
+    }
 
-        builder.setPositiveButton("Reset", (dialog, which) -> {
-            String email = emailInput.getText().toString().trim();
-            String newPassword = newPasswordInput.getText().toString().trim();
-
-            SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
-            String regEmail = prefs.getString("email", null);
-
-            if (regEmail != null && regEmail.equals(email)) {
-                if (newPassword.length() < 6) {
-                    Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                prefs.edit().putString("password", newPassword).apply();
-                Toast.makeText(this, "Password reset successful!", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Email not found!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-
-        builder.show();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Check if user is already signed in
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            handleSuccessfulGoogleSignIn(account);
+        }
     }
 } 

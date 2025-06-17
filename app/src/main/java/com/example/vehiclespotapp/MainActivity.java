@@ -56,6 +56,12 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.SharedPreferences;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+
+import java.util.concurrent.Executor;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
@@ -84,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
     private CompassOverlay compassOverlay;
     private RotationGestureOverlay rotationGestureOverlay;
     private MyLocationNewOverlay myLocationOverlay;
+
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "app_settings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +149,9 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 startLiveLocationTracking();
             }
+
+            // Initialize SharedPreferences
+            sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         } catch (Exception e) {
             showErrorAndFinish("Error initializing MainActivity: " + e.getMessage());   
         }
@@ -545,6 +557,11 @@ public class MainActivity extends AppCompatActivity {
         if (myLocationButton != null) {
             myLocationButton.setVisibility(View.VISIBLE);
         }
+        // Show the zoom controls
+        View zoomControls = findViewById(R.id.zoomControls);
+        if (zoomControls != null) {
+            zoomControls.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showHistoryFragment() {
@@ -557,6 +574,11 @@ public class MainActivity extends AppCompatActivity {
         View myLocationButton = findViewById(R.id.btnMyLocation);
         if (myLocationButton != null) {
             myLocationButton.setVisibility(View.GONE);
+        }
+        // Hide the zoom controls
+        View zoomControls = findViewById(R.id.zoomControls);
+        if (zoomControls != null) {
+            zoomControls.setVisibility(View.GONE);
         }
 
         Fragment historyFragment = getSupportFragmentManager().findFragmentByTag("history");

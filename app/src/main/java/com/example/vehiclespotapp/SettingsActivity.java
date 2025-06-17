@@ -14,13 +14,27 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
+
+import java.util.concurrent.Executor;
 
 public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "app_settings";
     private static final String[] MAP_TYPES = {"Normal", "Satellite", "Terrain", "Hybrid"};
+    
+    // Biometric variables
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+    private Executor executor;
+    private Button buttonBiometric;
+    private boolean isBiometricEnabled = false;
+    
+    // Add this mapping for language codes
     private static final String[] LANGUAGES = {
         "English",
         "Hindi",
@@ -81,9 +95,14 @@ public class SettingsActivity extends AppCompatActivity {
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
+        // Apply saved dark mode preference
+        boolean darkMode = sharedPreferences.getBoolean("dark_mode", false);
+        AppCompatDelegate.setDefaultNightMode(darkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
         // Initialize views
         initializeViews();
         loadSavedSettings();
+        setupBiometricPrompt();
     }
 
     private void initializeViews() {
@@ -106,29 +125,108 @@ public class SettingsActivity extends AppCompatActivity {
             AutoCompleteTextView dropdownMapType = findViewById(R.id.dropdownMapType);
             SwitchMaterial switchTraffic = findViewById(R.id.switchTraffic);
 
-            // Theme Settings
-            SwitchMaterial switchDarkMode = findViewById(R.id.switchDarkMode);
-
             // Language Settings
             AutoCompleteTextView dropdownLanguage = findViewById(R.id.dropdownLanguage);
 
             // Logout Button
             Button logoutButton = findViewById(R.id.buttonLogout);
 
+            // Biometric Button
+            buttonBiometric = findViewById(R.id.buttonBiometric);
+            isBiometricEnabled = sharedPreferences.getBoolean("biometric_enabled", false);
+            updateBiometricButtonState();
+
             // Set up click listeners and change listeners
             setupListeners(changePasswordButton, deleteAccountButton, switchNotifications, 
                     switchSound, switchVibration, dropdownMapType, switchTraffic, 
-                    switchDarkMode, dropdownLanguage, logoutButton);
+                    dropdownLanguage, logoutButton);
         } catch (Exception e) {
             Toast.makeText(this, "Error initializing settings: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
+    private void updateBiometricButtonState() {
+        if (buttonBiometric != null) {
+            BiometricManager biometricManager = BiometricManager.from(this);
+            int canAuthenticate = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG);
+            
+            if (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS) {
+                buttonBiometric.setEnabled(true);
+                buttonBiometric.setAlpha(1f);
+                buttonBiometric.setText(isBiometricEnabled ? "Disable Fingerprint" : "Enable Fingerprint");
+                buttonBiometric.setOnClickListener(v -> {
+                    if (isBiometricEnabled) {
+                        disableBiometric();
+                    } else {
+                        showBiometricPrompt();
+                    }
+                });
+            } else {
+                buttonBiometric.setEnabled(false);
+                buttonBiometric.setAlpha(0.5f);
+                buttonBiometric.setText("Fingerprint Not Available");
+            }
+        }
+    }
+
+    private void setupBiometricPrompt() {
+        executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(this, executor,
+                new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        isBiometricEnabled = !isBiometricEnabled;
+                        sharedPreferences.edit().putBoolean("biometric_enabled", isBiometricEnabled).apply();
+                        updateBiometricButtonState();
+                        Toast.makeText(SettingsActivity.this, 
+                            isBiometricEnabled ? "Fingerprint enabled" : "Fingerprint disabled", 
+                            Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthenticationError(int errorCode, CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+                        Toast.makeText(SettingsActivity.this, 
+                            "Authentication error: " + errString, 
+                            Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                        Toast.makeText(SettingsActivity.this, 
+                            "Authentication failed", 
+                            Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Fingerprint Authentication")
+                .setSubtitle(isBiometricEnabled ? "Authenticate to disable fingerprint" : "Authenticate to enable fingerprint")
+                .setNegativeButtonText("Cancel")
+                .build();
+    }
+
+    private void showBiometricPrompt() {
+        if (biometricPrompt != null && promptInfo != null) {
+            biometricPrompt.authenticate(promptInfo);
+        } else {
+            Toast.makeText(this, "Biometric prompt not initialized", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void disableBiometric() {
+        isBiometricEnabled = false;
+        sharedPreferences.edit().putBoolean("biometric_enabled", false).apply();
+        updateBiometricButtonState();
+        Toast.makeText(this, "Fingerprint disabled", Toast.LENGTH_SHORT).show();
+    }
+
     private void setupListeners(Button changePasswordButton, Button deleteAccountButton,
                               SwitchMaterial switchNotifications, SwitchMaterial switchSound,
                               SwitchMaterial switchVibration, AutoCompleteTextView dropdownMapType,
-                              SwitchMaterial switchTraffic, SwitchMaterial switchDarkMode,
-                              AutoCompleteTextView dropdownLanguage, Button logoutButton) {
+                              SwitchMaterial switchTraffic, AutoCompleteTextView dropdownLanguage, Button logoutButton) {
         try {
             // Account Settings
             changePasswordButton.setOnClickListener(v -> {
@@ -165,32 +263,18 @@ public class SettingsActivity extends AppCompatActivity {
                 saveSetting("show_traffic", isChecked);
             });
 
-            // Theme Settings
-            switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                saveSetting("dark_mode", isChecked);
-                if (isChecked) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
-            });
+            // Removed: Theme Settings (dark mode)
 
             // Language Settings
             dropdownLanguage.setAdapter(new ArrayAdapter<>(this, 
                     android.R.layout.select_dialog_item, LANGUAGES));
-            dropdownLanguage.setDropDownHeight(600); // Set a fixed height for the dropdown
             dropdownLanguage.setOnClickListener(v -> dropdownLanguage.showDropDown());
             dropdownLanguage.setOnItemClickListener((parent, view, position, id) -> {
                 if (position >= 0 && position < LANGUAGES.length) {
                     try {
-                        // Save the language preference
                     saveSetting("language", position);
-                        
-                    // Change app locale
                         String selectedLanguage = LANGUAGE_CODES[position];
                         LocaleHelper.setLocale(this, selectedLanguage);
-                        
-                        // Restart the app safely
                         Intent intent = new Intent(this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
@@ -234,13 +318,12 @@ public class SettingsActivity extends AppCompatActivity {
             ((SwitchMaterial) findViewById(R.id.switchTraffic))
                     .setChecked(sharedPreferences.getBoolean("show_traffic", false));
 
-            // Load theme settings
-            boolean isDarkMode = sharedPreferences.getBoolean("dark_mode", false);
-            ((SwitchMaterial) findViewById(R.id.switchDarkMode))
-                    .setChecked(isDarkMode);
-            if (isDarkMode) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            }
+            SwitchMaterial switchDarkMode = findViewById(R.id.switchDarkMode);
+            switchDarkMode.setChecked(sharedPreferences.getBoolean("dark_mode", false));
+            switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                sharedPreferences.edit().putBoolean("dark_mode", isChecked).apply();
+                AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+            });
 
             // Load language settings
             int language = sharedPreferences.getInt("language", 0);
@@ -248,6 +331,8 @@ public class SettingsActivity extends AppCompatActivity {
                 ((AutoCompleteTextView) findViewById(R.id.dropdownLanguage))
                     .setText(LANGUAGES[language], false);
             }
+
+            // Removed: Biometric settings
         } catch (Exception e) {
             Toast.makeText(this, "Error loading settings: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -386,4 +471,4 @@ public class SettingsActivity extends AppCompatActivity {
             Toast.makeText(this, "Error deleting account: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-} 
+}

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App Name -->
     <string name="app_name">Vehicle Parking Spot</string>
+    
+    <!-- Location Related -->
     <string name="save_location">Save Location</string>
     <string name="find_location">Find My Vehicle</string>
     <string name="mark_parking">Mark where you parked your vehicle</string>
@@ -13,10 +16,13 @@
     <string name="no_location_message">No saved location found for your vehicle.</string>
     <string name="getting_location">Getting your location...</string>
     <string name="location_error">Unable to get your location. Please try again.</string>
-    <string name="error">Error</string>
-    <string name="map_error">Error loading map</string>
     <string name="no_saved_location">No saved location found!</string>
     <string name="showing_location">Showing your parked vehicle location</string>
+    <string name="my_location">My Location</string>
+    
+    <!-- Common -->
+    <string name="error">Error</string>
+    <string name="map_error">Error loading map</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     
@@ -35,10 +41,31 @@
     <string name="delete_location_message">Are you sure you want to delete this parking location?</string>
     <string name="delete">Delete</string>
     <string name="location_deleted">Location deleted</string>
+    
+    <!-- Language Settings -->
     <string name="select_language">Select Language</string>
     <string name="language_english">English</string>
     <string name="language_hindi">Hindi</string>
     <string name="change_language">Change Language</string>
     <string name="language_changed">Language changed successfully</string>
-    <string name="my_location">My Location</string>
+    
+    <!-- OTP Verification -->
+    <string name="verify_otp">Verify OTP</string>
+    <string name="enter_otp_message">Enter the OTP sent to your phone number</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify">Verify</string>
+    <string name="resend_otp">Resend OTP</string>
+    
+    <!-- Registration and Login -->
+    <string name="register">Register</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_account">Already have an account? Login</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
 </resources>

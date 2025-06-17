@@ -14,6 +14,8 @@
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:name=".MyApp"
@@ -64,7 +66,9 @@
             android:theme="@style/Theme.VehicleSpotApp.NoActionBar"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask">
+            <!-- Removed intent-filter from here -->
+        </activity>
 
         <activity
             android:name=".ForgotPasswordActivity"
@@ -87,7 +91,9 @@
             android:theme="@style/Theme.VehicleSpotApp.NoActionBar"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask">
+            <!-- Remove the intent-filter from here -->
+        </activity>
 
         <activity
             android:name=".ProfileActivity"
@@ -111,14 +117,10 @@
             android:label="@string/select_language" />
 
         <activity
-            android:name=".LocationActivity"
-            android:exported="false"
-            android:label="Location Selection" />
-
-        <activity
             android:name=".MapActivity"
             android:exported="false"
             android:label="@string/app_name" />
-    </application>
 
+        <activity android:name=".OTPVerificationActivity" />
+    </application>
 </manifest>
