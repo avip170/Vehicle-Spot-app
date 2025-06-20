@@ -127,6 +127,7 @@ public class HistoryFragment extends Fragment {
             private final TextView dateTimeText;
             private final TextView locationText;
             private final Button navigateButton;
+            private final Button shareButton;
             private final ImageButton deleteButton;
             private final SimpleDateFormat dateFormat;
 
@@ -135,6 +136,7 @@ public class HistoryFragment extends Fragment {
                 dateTimeText = itemView.findViewById(R.id.dateTimeText);
                 locationText = itemView.findViewById(R.id.locationText);
                 navigateButton = itemView.findViewById(R.id.navigateButton);
+                shareButton = itemView.findViewById(R.id.shareButton);
                 deleteButton = itemView.findViewById(R.id.btnDelete);
                 dateFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault());
             }
@@ -165,6 +167,18 @@ public class HistoryFragment extends Fragment {
                             "Google Maps app is not installed", 
                             Toast.LENGTH_SHORT).show();
                     }
+                });
+
+                shareButton.setOnClickListener(v -> {
+                    String mapsUrl = String.format(Locale.US,
+                        "https://maps.google.com/?q=%f,%f",
+                        location.getLatitude(),
+                        location.getLongitude());
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Parking Location");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "Here's my parking location: " + mapsUrl);
+                    itemView.getContext().startActivity(Intent.createChooser(shareIntent, "Share Location"));
                 });
 
                 deleteButton.setOnClickListener(v -> {

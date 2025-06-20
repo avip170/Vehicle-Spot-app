@@ -29,8 +29,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 public class ProfileActivity extends AppCompatActivity {
-    private EditText firstNameEdit, lastNameEdit, emailEdit, phoneEdit, dobEdit, bioEdit;
-    private AutoCompleteTextView genderEdit, countryEdit, stateEdit, cityEdit;
+    private EditText firstNameEdit, lastNameEdit, emailEdit, vehicleNumberEdit, bioEdit;
     private Button saveButton;
     private ImageView profileIcon, editProfilePic;
     private static final int REQUEST_CAMERA = 1001;
@@ -48,42 +47,28 @@ public class ProfileActivity extends AppCompatActivity {
         firstNameEdit = findViewById(R.id.editTextFirstName);
         lastNameEdit = findViewById(R.id.editTextLastName);
         emailEdit = findViewById(R.id.editTextEmail);
-        phoneEdit = findViewById(R.id.editTextPhone);
-        dobEdit = findViewById(R.id.editTextDob);
-        genderEdit = findViewById(R.id.editTextGender);
-        countryEdit = findViewById(R.id.editTextCountry);
-        stateEdit = findViewById(R.id.editTextState);
-        cityEdit = findViewById(R.id.editTextCity);
+        vehicleNumberEdit = findViewById(R.id.editTextVehicleNumber);
         bioEdit = findViewById(R.id.editTextBio);
         saveButton = findViewById(R.id.buttonSaveProfile);
         profileIcon = findViewById(R.id.profileIcon);
         editProfilePic = findViewById(R.id.editProfilePic);
-
-        // Set up dropdowns
-        String[] genderOptions = {"Male", "Female", "Other"};
-        genderEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, genderOptions));
-
-        String[] countryOptions = {"India", "United States", "United Kingdom", "Canada", "Australia"};
-        countryEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, countryOptions));
-
-        String[] stateOptions = {"Gujarat", "Maharashtra", "California", "Texas", "New York"};
-        stateEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, stateOptions));
-
-        String[] cityOptions = {"Ahmedabad", "Mumbai", "Los Angeles", "Houston", "New York City"};
-        cityEdit.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, cityOptions));
 
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         // Load saved values
         firstNameEdit.setText(prefs.getString("first_name", ""));
         lastNameEdit.setText(prefs.getString("last_name", ""));
         emailEdit.setText(prefs.getString("email", ""));
-        phoneEdit.setText(prefs.getString("phone", ""));
-        dobEdit.setText(prefs.getString("dob", ""));
-        genderEdit.setText(prefs.getString("gender", ""));
-        countryEdit.setText(prefs.getString("country", ""));
-        stateEdit.setText(prefs.getString("state", ""));
-        cityEdit.setText(prefs.getString("city", ""));
+        vehicleNumberEdit.setText(prefs.getString("vehicle_number", ""));
         bioEdit.setText(prefs.getString("bio", ""));
+
+        // Check if user signed in with Google
+        boolean isGoogleSignIn = prefs.getBoolean("google_sign_in", false);
+        if (isGoogleSignIn) {
+            // Make email field read-only for Google users
+            emailEdit.setEnabled(false);
+            emailEdit.setFocusable(false);
+            emailEdit.setHint("Email (Google Account)");
+        }
 
         // Load saved profile image if exists
         savedImagePath = prefs.getString("profile_image_path", null);
@@ -94,31 +79,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
 
-        // Date picker for DOB
-        dobEdit.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            DatePickerDialog dialog = new DatePickerDialog(this,
-                (view, year, month, dayOfMonth) -> {
-                    String date = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
-                    dobEdit.setText(date);
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH));
-            dialog.show();
-        });
-
         saveButton.setOnClickListener(v -> {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("first_name", firstNameEdit.getText().toString().trim());
             editor.putString("last_name", lastNameEdit.getText().toString().trim());
             // Email is not editable
-            editor.putString("phone", phoneEdit.getText().toString().trim());
-            editor.putString("dob", dobEdit.getText().toString().trim());
-            editor.putString("gender", genderEdit.getText().toString().trim());
-            editor.putString("country", countryEdit.getText().toString().trim());
-            editor.putString("state", stateEdit.getText().toString().trim());
-            editor.putString("city", cityEdit.getText().toString().trim());
+            editor.putString("vehicle_number", vehicleNumberEdit.getText().toString().trim());
             editor.putString("bio", bioEdit.getText().toString().trim());
             // Save profile image if changed
             if (currentProfileBitmap != null) {

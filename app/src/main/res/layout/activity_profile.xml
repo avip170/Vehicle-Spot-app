@@ -91,80 +91,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextPhone"
+                        android:id="@+id/editTextVehicleNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Phone Number"
-                        android:inputType="phone"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextDob"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Date of Birth"
-                        android:focusable="false"
-                        android:clickable="true"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Gender Dropdown -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:endIconMode="dropdown_menu">
-                    <AutoCompleteTextView
-                        android:id="@+id/editTextGender"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Gender"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Country Dropdown -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:endIconMode="dropdown_menu">
-                    <AutoCompleteTextView
-                        android:id="@+id/editTextCountry"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Country"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- State Dropdown -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:endIconMode="dropdown_menu">
-                    <AutoCompleteTextView
-                        android:id="@+id/editTextState"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="State"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- City Dropdown -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:endIconMode="dropdown_menu">
-                    <AutoCompleteTextView
-                        android:id="@+id/editTextCity"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="City"
-                        android:inputType="none"/>
+                        android:hint="Vehicle Number"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

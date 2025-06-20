@@ -161,58 +161,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Map Settings Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="24dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="24dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Map Settings"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="16dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Map Type"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp"/>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:endIconMode="dropdown_menu">
-                    <AutoCompleteTextView
-                        android:id="@+id/dropdownMapType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Select Map Type"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchTraffic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Show Traffic"
-                    android:layout_marginTop="16dp"
-                    android:checked="false"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
         <!-- Theme Settings Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -266,6 +214,13 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="16dp"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Language"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp"/>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -276,9 +231,50 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Select Language"
-                        android:inputType="none"
-                        android:dropDownHeight="300dp"/>
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Email Support Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email Support"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"/>
+
+                <Button
+                    android:id="@+id/buttonContactSupport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Support"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/primaryColor"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:id="@+id/buttonSendFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Send Feedback"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/primaryColor"
+                    android:textColor="@android:color/white"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

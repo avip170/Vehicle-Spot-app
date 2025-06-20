@@ -2,14 +2,14 @@
 <issues format="6" by="lint 8.2.2" type="baseline" client="gradle" dependencies="false" name="AGP (8.2.2)" variant="all" version="8.2.2">
 
     <issue
-        id="MissingSuperCall"
-        message="Overriding method should call `super.onBackPressed`"
-        errorLine1="    public void onBackPressed() {"
-        errorLine2="                ~~~~~~~~~~~~~">
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="        generatedOTP = String.format(&quot;%06d&quot;, new Random().nextInt(999999));"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/com/example/vehiclespotapp/MainActivity.java"
-            line="607"
-            column="17"/>
+            file="src/main/java/com/example/vehiclespotapp/OTPVerificationActivity.java"
+            line="46"
+            column="24"/>
     </issue>
 
     <issue
@@ -19,7 +19,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/com/example/vehiclespotapp/ProfileActivity.java"
-            line="102"
+            line="111"
             column="35"/>
     </issue>
 
@@ -30,11 +30,11 @@
         errorLine2="               ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/com/example/vehiclespotapp/ProfileActivity.java"
-            line="163"
+            line="172"
             column="16"/>
         <location
             file="src/main/java/com/example/vehiclespotapp/ProfileActivity.java"
-            line="162"
+            line="171"
             column="56"
             message="Originally set here"/>
     </issue>
@@ -57,7 +57,7 @@
         errorLine2="        ~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="12"
+            line="13"
             column="9"/>
     </issue>
 
@@ -90,7 +90,7 @@
         errorLine2="             ~~~~~~~~~~~~~~">
         <location
             file="src/main/java/com/example/vehiclespotapp/SplashActivity.java"
-            line="11"
+            line="17"
             column="14"/>
     </issue>
 
@@ -101,18 +101,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="116"
+            line="122"
             column="13"/>
     </issue>
 
     <issue
         id="GradleDependency"
-        message="A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.0"
+        message="A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1"
         errorLine1="    implementation &apos;androidx.appcompat:appcompat:1.6.1&apos;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="69"
+            line="71"
             column="20"/>
     </issue>
 
@@ -123,7 +123,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="70"
+            line="72"
             column="20"/>
     </issue>
 
@@ -134,7 +134,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="71"
+            line="73"
             column="20"/>
     </issue>
 
@@ -145,7 +145,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="77"
+            line="76"
             column="20"/>
     </issue>
 
@@ -156,7 +156,18 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="78"
+            line="77"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.gms:play-services-auth than 20.7.0 is available: 21.3.0"
+        errorLine1="    implementation &apos;com.google.android.gms:play-services-auth:20.7.0&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="80"
             column="20"/>
     </issue>
 
@@ -167,40 +178,40 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="82"
+            line="84"
             column="20"/>
     </issue>
 
     <issue
         id="GradleDependency"
-        message="A newer version of androidx.lifecycle:lifecycle-viewmodel than 2.7.0 is available: 2.8.7"
+        message="A newer version of androidx.lifecycle:lifecycle-viewmodel than 2.7.0 is available: 2.9.1"
         errorLine1="    implementation &quot;androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version&quot;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="87"
+            line="89"
             column="20"/>
     </issue>
 
     <issue
         id="GradleDependency"
-        message="A newer version of androidx.lifecycle:lifecycle-livedata than 2.7.0 is available: 2.8.7"
+        message="A newer version of androidx.lifecycle:lifecycle-livedata than 2.7.0 is available: 2.9.1"
         errorLine1="    implementation &quot;androidx.lifecycle:lifecycle-livedata:$lifecycle_version&quot;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="88"
+            line="90"
             column="20"/>
     </issue>
 
     <issue
         id="GradleDependency"
-        message="A newer version of androidx.lifecycle:lifecycle-common-java8 than 2.7.0 is available: 2.8.7"
+        message="A newer version of androidx.lifecycle:lifecycle-common-java8 than 2.7.0 is available: 2.9.1"
         errorLine1="    implementation &quot;androidx.lifecycle:lifecycle-common-java8:$lifecycle_version&quot;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="89"
+            line="91"
             column="20"/>
     </issue>
 
@@ -211,7 +222,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="93"
+            line="98"
             column="31"/>
     </issue>
 
@@ -222,19 +233,8 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="94"
+            line="99"
             column="31"/>
-    </issue>
-
-    <issue
-        id="GradleDependency"
-        message="A newer version of androidx.core:core than 1.12.0 is available: 1.16.0"
-        errorLine1="    implementation &apos;androidx.core:core:1.12.0&apos;"
-        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="build.gradle"
-            line="100"
-            column="20"/>
     </issue>
 
     <issue
@@ -260,13 +260,24 @@
     </issue>
 
     <issue
-        id="LockedOrientationActivity"
-        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
-        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="GradleDependency"
+        message="A newer version of com.android.application than 8.9.2 is available: 8.10.1"
+        errorLine1="agp = &quot;8.9.2&quot;"
+        errorLine2="      ~~~~~~~">
         <location
-            file="src/main/AndroidManifest.xml"
-            line="52"
+            file="$HOME/AndroidStudioProjects/VehicleSpotapp/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.appcompat:appcompat than 1.7.0 is available: 1.7.1"
+        errorLine1="appcompat = &quot;1.7.0&quot;"
+        errorLine2="            ~~~~~~~">
+        <location
+            file="$HOME/AndroidStudioProjects/VehicleSpotapp/gradle/libs.versions.toml"
+            line="6"
             column="13"/>
     </issue>
 
@@ -277,7 +288,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="65"
+            line="54"
             column="13"/>
     </issue>
 
@@ -288,7 +299,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="73"
+            line="67"
             column="13"/>
     </issue>
 
@@ -299,7 +310,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="80"
+            line="77"
             column="13"/>
     </issue>
 
@@ -310,7 +321,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="88"
+            line="84"
             column="13"/>
     </issue>
 
@@ -321,7 +332,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="96"
+            line="92"
             column="13"/>
     </issue>
 
@@ -332,7 +343,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="104"
+            line="102"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="110"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraText"
+        message="Unexpected text found in layout file: &quot;android:layout_marginBottom=&quot;8dp&quot; android:backgroundTint=&quot;@color/colorPrimary&quot; android:textColor=&quot;@a...&quot;"
+        errorLine1="            android:layout_marginBottom=&quot;8dp&quot;"
+        errorLine2="            ^">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="111"
             column="13"/>
     </issue>
 
@@ -343,7 +376,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="3"
+            line="4"
             column="13"/>
     </issue>
 
@@ -354,7 +387,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="4"
+            line="7"
             column="13"/>
     </issue>
 
@@ -365,7 +398,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="5"
+            line="8"
             column="13"/>
     </issue>
 
@@ -376,7 +409,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="6"
+            line="9"
             column="13"/>
     </issue>
 
@@ -387,7 +420,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="7"
+            line="10"
             column="13"/>
     </issue>
 
@@ -398,7 +431,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="8"
+            line="11"
             column="13"/>
     </issue>
 
@@ -409,7 +442,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="9"
+            line="12"
             column="13"/>
     </issue>
 
@@ -420,7 +453,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="10"
+            line="13"
             column="13"/>
     </issue>
 
@@ -431,7 +464,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="11"
+            line="14"
             column="13"/>
     </issue>
 
@@ -442,7 +475,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="12"
+            line="15"
             column="13"/>
     </issue>
 
@@ -453,7 +486,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="13"
+            line="16"
             column="13"/>
     </issue>
 
@@ -464,7 +497,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="14"
+            line="17"
             column="13"/>
     </issue>
 
@@ -475,29 +508,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="15"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;error&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;error&quot;>Error&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="16"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;map_error&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;map_error&quot;>Error loading map&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="17"
+            line="18"
             column="13"/>
     </issue>
 
@@ -508,7 +519,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="18"
+            line="19"
             column="13"/>
     </issue>
 
@@ -519,7 +530,40 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="19"
+            line="20"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;my_location&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;my_location&quot;>My Location&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="21"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;error&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;error&quot;>Error&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;map_error&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;map_error&quot;>Error loading map&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="25"
             column="13"/>
     </issue>
 
@@ -530,7 +574,7 @@
         errorLine2="            ~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="20"
+            line="26"
             column="13"/>
     </issue>
 
@@ -541,7 +585,7 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="21"
+            line="27"
             column="13"/>
     </issue>
 
@@ -552,7 +596,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="24"
+            line="30"
             column="13"/>
     </issue>
 
@@ -563,7 +607,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="25"
+            line="31"
             column="13"/>
     </issue>
 
@@ -574,7 +618,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="26"
+            line="32"
             column="13"/>
     </issue>
 
@@ -585,7 +629,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="27"
+            line="33"
             column="13"/>
     </issue>
 
@@ -596,7 +640,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="30"
+            line="36"
             column="13"/>
     </issue>
 
@@ -607,7 +651,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="31"
+            line="37"
             column="13"/>
     </issue>
 
@@ -618,7 +662,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="32"
+            line="38"
             column="13"/>
     </issue>
 
@@ -629,7 +673,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="33"
+            line="39"
             column="13"/>
     </issue>
 
@@ -640,7 +684,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="34"
+            line="40"
             column="13"/>
     </issue>
 
@@ -651,7 +695,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="35"
+            line="41"
             column="13"/>
     </issue>
 
@@ -662,15 +706,136 @@
         errorLine2="            ~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="36"
+            line="42"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
-        message="&quot;account_settings&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;account_settings&quot;>Account Settings&lt;/string>"
+        message="&quot;location_deleted&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;location_deleted&quot;>Location deleted&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="43"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;select_language&quot; is not translated in &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;select_language&quot;>Select Language&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="46"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;language_english&quot; is not translated in &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;language_english&quot;>English&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="47"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;language_hindi&quot; is not translated in &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;language_hindi&quot;>Hindi&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="48"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;change_language&quot; is not translated in &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;change_language&quot;>Change Language&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="49"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;language_changed&quot; is not translated in &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;language_changed&quot;>Language changed successfully&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="50"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;verify_otp&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;verify_otp&quot;>Verify OTP&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="53"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;enter_otp_message&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;enter_otp_message&quot;>Enter the OTP sent to your phone number&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="54"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;enter_otp&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;enter_otp&quot;>Enter OTP&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="55"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;verify&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;verify&quot;>Verify&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="56"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;resend_otp&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;resend_otp&quot;>Resend OTP&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="57"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;register&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;register&quot;>Register&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="60"
@@ -679,9 +844,9 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;change_password&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;change_password&quot;>Change Password&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        message="&quot;first_name&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;first_name&quot;>First Name&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="61"
@@ -690,9 +855,9 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;delete_account&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;delete_account&quot;>Delete Account&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        message="&quot;last_name&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;last_name&quot;>Last Name&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="62"
@@ -701,9 +866,31 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;notification_settings&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;notification_settings&quot;>Notification Settings&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="&quot;email&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;email&quot;>Email&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="63"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;phone_number&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;phone_number&quot;>Phone Number&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="64"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;password&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;password&quot;>Password&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="65"
@@ -712,9 +899,9 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;enable_notifications&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;enable_notifications&quot;>Enable Notifications&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="&quot;confirm_password&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;confirm_password&quot;>Confirm Password&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="66"
@@ -723,9 +910,9 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;notification_sound&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;notification_sound&quot;>Notification Sound&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="&quot;already_have_account&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;already_have_account&quot;>Already have an account? Login&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="67"
@@ -734,9 +921,9 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;notification_vibration&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;notification_vibration&quot;>Notification Vibration&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="&quot;login&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;login&quot;>Login&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
             line="68"
@@ -745,101 +932,24 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;map_settings&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;map_settings&quot;>Map Settings&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        message="&quot;forgot_password&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;forgot_password&quot;>Forgot password?&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="71"
+            line="69"
             column="13"/>
     </issue>
 
     <issue
         id="MissingTranslation"
-        message="&quot;map_type&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;map_type&quot;>Map Type&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="72"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;show_traffic&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;show_traffic&quot;>Show Traffic&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="73"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;theme_settings&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;theme_settings&quot;>Theme Settings&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="76"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;dark_mode&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;dark_mode&quot;>Dark Mode&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="77"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;dark_mode_description&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;dark_mode_description&quot;>Switch between light and dark theme&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="78"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;language_settings&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;language_settings&quot;>Language Settings&lt;/string>"
+        message="&quot;dont_have_account&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
+        errorLine1="    &lt;string name=&quot;dont_have_account&quot;>Don\&apos;t have an account? Register&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="81"
+            line="70"
             column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;logout&quot; is not translated in &quot;hi&quot; (Hindi) or &quot;gu&quot; (Gujarati)"
-        errorLine1="    &lt;string name=&quot;logout&quot;>Logout&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="84"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="PluralsCandidate"
-        message="Formatting %d followed by words (&quot;seconds&quot;): This should probably be a plural rather than a string"
-        errorLine1="    &lt;string name=&quot;lockout_active&quot;>Account locked for %d seconds&lt;/string>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="51"
-            column="5"/>
     </issue>
 
     <issue
@@ -928,6 +1038,17 @@
 
     <issue
         id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/white` with a theme that also paints a background (inferred theme is `@style/Theme.VehicleSpotApp`)"
+        errorLine1="    android:background=&quot;@color/white&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_otp_verification.xml"
+            line="6"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
         message="Possible overdraw: Root element paints background `@color/white` with a theme that also paints a background (inferred theme is `@style/Theme_VehicleSpotApp_NoActionBar`)"
         errorLine1="    android:background=&quot;@color/white&quot;>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
@@ -950,6 +1071,17 @@
 
     <issue
         id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/white` with a theme that also paints a background (inferred theme is `@style/Theme_VehicleSpotApp_NoActionBar`)"
+        errorLine1="    android:background=&quot;@color/white&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="6"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
         message="Possible overdraw: Root element paints background `@android:color/white` with a theme that also paints a background (inferred theme is `@style/Theme_VehicleSpotApp_NoActionBar`)"
         errorLine1="    android:background=&quot;@android:color/white&quot;>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
@@ -966,7 +1098,7 @@
         errorLine2="           ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/colors.xml"
-            line="3"
+            line="4"
             column="12"/>
     </issue>
 
@@ -977,7 +1109,7 @@
         errorLine2="           ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/colors.xml"
-            line="4"
+            line="5"
             column="12"/>
     </issue>
 
@@ -988,7 +1120,7 @@
         errorLine2="           ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/colors.xml"
-            line="5"
+            line="6"
             column="12"/>
     </issue>
 
@@ -999,7 +1131,7 @@
         errorLine2="           ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/colors.xml"
-            line="6"
+            line="7"
             column="12"/>
     </issue>
 
@@ -1010,7 +1142,7 @@
         errorLine2="           ~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/colors.xml"
-            line="7"
+            line="8"
             column="12"/>
     </issue>
 
@@ -1021,19 +1153,19 @@
         errorLine2="           ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/colors.xml"
-            line="14"
+            line="15"
             column="12"/>
     </issue>
 
     <issue
         id="UnusedResources"
-        message="The resource `R.color.red` appears to be unused"
-        errorLine1="    &lt;color name=&quot;red&quot;>#FF0000&lt;/color>"
-        errorLine2="           ~~~~~~~~~~">
+        message="The resource `R.drawable.edit_text_background` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
         <location
-            file="src/main/res/values/colors.xml"
-            line="16"
-            column="12"/>
+            file="src/main/res/drawable/edit_text_background.xml"
+            line="1"
+            column="1"/>
     </issue>
 
     <issue
@@ -1116,7 +1248,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="6"
+            line="9"
             column="13"/>
     </issue>
 
@@ -1127,29 +1259,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="7"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.error` appears to be unused"
-        errorLine1="    &lt;string name=&quot;error&quot;>Error&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="16"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.map_error` appears to be unused"
-        errorLine1="    &lt;string name=&quot;map_error&quot;>Error loading map&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="17"
+            line="10"
             column="13"/>
     </issue>
 
@@ -1160,7 +1270,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="18"
+            line="19"
             column="13"/>
     </issue>
 
@@ -1171,29 +1281,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="19"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.date_format` appears to be unused"
-        errorLine1="    &lt;string name=&quot;date_format&quot;>MMM dd, yyyy HH:mm&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="32"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.change_language` appears to be unused"
-        errorLine1="    &lt;string name=&quot;change_language&quot;>Change Language&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="41"
+            line="20"
             column="13"/>
     </issue>
 
@@ -1204,18 +1292,161 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="43"
+            line="21"
             column="13"/>
     </issue>
 
     <issue
         id="UnusedResources"
-        message="The resource `R.string.biometric_not_enrolled` appears to be unused"
-        errorLine1="    &lt;string name=&quot;biometric_not_enrolled&quot;>No biometrics enrolled on this device&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="The resource `R.string.error` appears to be unused"
+        errorLine1="    &lt;string name=&quot;error&quot;>Error&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="55"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.map_error` appears to be unused"
+        errorLine1="    &lt;string name=&quot;map_error&quot;>Error loading map&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="25"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.date_format` appears to be unused"
+        errorLine1="    &lt;string name=&quot;date_format&quot;>MMM dd, yyyy HH:mm&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="38"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.change_language` appears to be unused"
+        errorLine1="    &lt;string name=&quot;change_language&quot;>Change Language&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="49"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.first_name` appears to be unused"
+        errorLine1="    &lt;string name=&quot;first_name&quot;>First Name&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="61"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.last_name` appears to be unused"
+        errorLine1="    &lt;string name=&quot;last_name&quot;>Last Name&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="62"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.email` appears to be unused"
+        errorLine1="    &lt;string name=&quot;email&quot;>Email&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="63"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.phone_number` appears to be unused"
+        errorLine1="    &lt;string name=&quot;phone_number&quot;>Phone Number&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="64"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.password` appears to be unused"
+        errorLine1="    &lt;string name=&quot;password&quot;>Password&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="65"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.confirm_password` appears to be unused"
+        errorLine1="    &lt;string name=&quot;confirm_password&quot;>Confirm Password&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="66"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.already_have_account` appears to be unused"
+        errorLine1="    &lt;string name=&quot;already_have_account&quot;>Already have an account? Login&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="67"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.login` appears to be unused"
+        errorLine1="    &lt;string name=&quot;login&quot;>Login&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="68"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.forgot_password` appears to be unused"
+        errorLine1="    &lt;string name=&quot;forgot_password&quot;>Forgot password?&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="69"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.dont_have_account` appears to be unused"
+        errorLine1="    &lt;string name=&quot;dont_have_account&quot;>Don\&apos;t have an account? Register&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="70"
             column="13"/>
     </issue>
 
@@ -1231,35 +1462,13 @@
     </issue>
 
     <issue
-        id="UselessParent"
-        message="This `LinearLayout` layout or its `LinearLayout` parent is unnecessary"
-        errorLine1="                    &lt;LinearLayout"
-        errorLine2="                     ~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_settings.xml"
-            line="104"
-            column="22"/>
-    </issue>
-
-    <issue
-        id="UselessParent"
-        message="This `LinearLayout` layout or its `LinearLayout` parent is unnecessary"
-        errorLine1="                    &lt;LinearLayout"
-        errorLine2="                     ~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_settings.xml"
-            line="316"
-            column="22"/>
-    </issue>
-
-    <issue
         id="TypographyEllipsis"
         message="Replace &quot;...&quot; with ellipsis character (…, &amp;#8230;) ?"
         errorLine1="    &lt;string name=&quot;getting_location&quot;>Getting your location...&lt;/string>"
         errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="14"
+            line="17"
             column="37"/>
     </issue>
 
@@ -1314,7 +1523,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="69"
+            line="71"
             column="20"/>
     </issue>
 
@@ -1325,7 +1534,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="70"
+            line="72"
             column="20"/>
     </issue>
 
@@ -1336,18 +1545,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="71"
-            column="20"/>
-    </issue>
-
-    <issue
-        id="UseTomlInstead"
-        message="Use version catalog instead"
-        errorLine1="    implementation &apos;androidx.biometric:biometric:1.2.0-alpha05&apos;"
-        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="build.gradle"
-            line="74"
+            line="73"
             column="20"/>
     </issue>
 
@@ -1358,7 +1556,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="77"
+            line="76"
             column="20"/>
     </issue>
 
@@ -1369,7 +1567,18 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="78"
+            line="77"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseTomlInstead"
+        message="Use version catalog instead"
+        errorLine1="    implementation &apos;com.google.android.gms:play-services-auth:20.7.0&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="80"
             column="20"/>
     </issue>
 
@@ -1380,7 +1589,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="82"
+            line="84"
             column="20"/>
     </issue>
 
@@ -1391,7 +1600,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="87"
+            line="89"
             column="20"/>
     </issue>
 
@@ -1402,7 +1611,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="88"
+            line="90"
             column="20"/>
     </issue>
 
@@ -1413,7 +1622,18 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="89"
+            line="91"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseTomlInstead"
+        message="Use version catalog instead"
+        errorLine1="    implementation &apos;androidx.biometric:biometric:1.2.0-alpha05&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="94"
             column="20"/>
     </issue>
 
@@ -1424,7 +1644,7 @@
         errorLine2="                       ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="92"
+            line="97"
             column="24"/>
     </issue>
 
@@ -1435,7 +1655,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="93"
+            line="98"
             column="31"/>
     </issue>
 
@@ -1446,7 +1666,7 @@
         errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="94"
+            line="99"
             column="31"/>
     </issue>
 
@@ -1457,18 +1677,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="97"
-            column="20"/>
-    </issue>
-
-    <issue
-        id="UseTomlInstead"
-        message="Use version catalog instead"
-        errorLine1="    implementation &apos;androidx.core:core:1.12.0&apos;"
-        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="build.gradle"
-            line="100"
+            line="102"
             column="20"/>
     </issue>
 
@@ -1519,6 +1728,17 @@
     <issue
         id="ContentDescription"
         message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_otp_verification.xml"
+            line="8"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
         errorLine1="                    &lt;ImageView"
         errorLine2="                     ~~~~~~~~~">
         <location
@@ -1539,25 +1759,14 @@
     </issue>
 
     <issue
-        id="LabelFor"
-        message="Missing accessibility label: provide either a view with an `android:labelFor` that references this view or provide an `android:hint`"
-        errorLine1="                        &lt;AutoCompleteTextView"
-        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~">
+        id="SetTextI18n"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        errorLine1="        textPhoneNumber.setText(getString(R.string.enter_otp_message) + &quot; &quot; + phoneNumber);"
+        errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/res/layout/activity_settings.xml"
-            line="261"
-            column="26"/>
-    </issue>
-
-    <issue
-        id="LabelFor"
-        message="Missing accessibility label: provide either a view with an `android:labelFor` that references this view or provide an `android:hint`"
-        errorLine1="                        &lt;AutoCompleteTextView"
-        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_settings.xml"
-            line="382"
-            column="26"/>
+            file="src/main/java/com/example/vehiclespotapp/OTPVerificationActivity.java"
+            line="35"
+            column="33"/>
     </issue>
 
     <issue
@@ -1567,7 +1776,7 @@
         errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/com/example/vehiclespotapp/SettingsActivity.java"
-            line="130"
+            line="113"
             column="33"/>
     </issue>
 
@@ -1578,8 +1787,19 @@
         errorLine2="                                ~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/com/example/vehiclespotapp/SettingsActivity.java"
-            line="130"
+            line="113"
             column="33"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="                buttonBiometric.setText(&quot;Fingerprint Not Available&quot;);"
+        errorLine2="                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/example/vehiclespotapp/SettingsActivity.java"
+            line="167"
+            column="41"/>
     </issue>
 
     <issue
@@ -1690,6 +1910,17 @@
             file="src/main/res/layout/activity_login.xml"
             line="94"
             column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;OR&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;OR&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_login.xml"
+            line="122"
+            column="9"/>
     </issue>
 
     <issue
@@ -1870,23 +2101,12 @@
 
     <issue
         id="HardcodedText"
-        message="Hardcoded string &quot;Register&quot;, should use `@string` resource"
-        errorLine1="                android:text=&quot;Register&quot;"
-        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_register.xml"
-            line="43"
-            column="17"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
         message="Hardcoded string &quot;First Name&quot;, should use `@string` resource"
         errorLine1="                    android:hint=&quot;First Name&quot;"
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/layout/activity_register.xml"
-            line="57"
+            line="59"
             column="21"/>
     </issue>
 
@@ -1897,7 +2117,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/layout/activity_register.xml"
-            line="69"
+            line="72"
             column="21"/>
     </issue>
 
@@ -1908,7 +2128,18 @@
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/layout/activity_register.xml"
-            line="81"
+            line="85"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Phone Number&quot;, should use `@string` resource"
+        errorLine1="                    android:hint=&quot;Phone Number&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_register.xml"
+            line="98"
             column="21"/>
     </issue>
 
@@ -1919,7 +2150,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/layout/activity_register.xml"
-            line="93"
+            line="110"
             column="21"/>
     </issue>
 
@@ -1930,7 +2161,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/layout/activity_register.xml"
-            line="105"
+            line="122"
             column="21"/>
     </issue>
 
@@ -1941,7 +2172,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/layout/activity_register.xml"
-            line="113"
+            line="130"
             column="17"/>
     </issue>
 
@@ -1952,8 +2183,272 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/layout/activity_register.xml"
-            line="120"
+            line="137"
             column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;App Version: 1.0&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;App Version: 1.0&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="32"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Account Settings&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Account Settings&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="56"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Change Password&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Change Password&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="65"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Delete Account&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Delete Account&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="72"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Biometric Authentication&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Biometric Authentication&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="94"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Fingerprint Authentication&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Fingerprint Authentication&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="102"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Notification Settings&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Notification Settings&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="134"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Enable Notifications&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Enable Notifications&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="143"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Notification Sound&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Notification Sound&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="150"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Vibration&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Vibration&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="158"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Map Settings&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Map Settings&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="181"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Map Type&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Map Type&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="189"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Select Map Type&quot;, should use `@string` resource"
+        errorLine1="                        android:hint=&quot;Select Map Type&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="202"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Show Traffic&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Show Traffic&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="210"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Theme Settings&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Theme Settings&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="233"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Dark Mode&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Dark Mode&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="242"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Language Settings&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Language Settings&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="264"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Select Language&quot;, should use `@string` resource"
+        errorLine1="                        android:hint=&quot;Select Language&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="278"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;About&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;About&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="302"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Vehicle Spot App&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Vehicle Spot App&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="310"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Version 1.0&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Version 1.0&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="317"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;© 2024 Vehicle Spot App&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;© 2024 Vehicle Spot App&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="324"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Developed by Avi Patel&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Developed by Avi Patel&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="331"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Logout&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Logout&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="353"
+            column="21"/>
     </issue>
 
     <issue

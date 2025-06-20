@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.biometric.BiometricManager;
@@ -19,13 +20,13 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.example.vehiclespotapp.service.EmailSupportService;
 
 import java.util.concurrent.Executor;
 
 public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "app_settings";
-    private static final String[] MAP_TYPES = {"Normal", "Satellite", "Terrain", "Hybrid"};
     
     // Biometric variables
     private BiometricPrompt biometricPrompt;
@@ -121,15 +122,15 @@ public class SettingsActivity extends AppCompatActivity {
             SwitchMaterial switchSound = findViewById(R.id.switchSound);
             SwitchMaterial switchVibration = findViewById(R.id.switchVibration);
 
-            // Map Settings
-            AutoCompleteTextView dropdownMapType = findViewById(R.id.dropdownMapType);
-            SwitchMaterial switchTraffic = findViewById(R.id.switchTraffic);
-
             // Language Settings
             AutoCompleteTextView dropdownLanguage = findViewById(R.id.dropdownLanguage);
 
             // Logout Button
             Button logoutButton = findViewById(R.id.buttonLogout);
+
+            // Email Support Buttons
+            Button contactSupportButton = findViewById(R.id.buttonContactSupport);
+            Button sendFeedbackButton = findViewById(R.id.buttonSendFeedback);
 
             // Biometric Button
             buttonBiometric = findViewById(R.id.buttonBiometric);
@@ -138,8 +139,8 @@ public class SettingsActivity extends AppCompatActivity {
 
             // Set up click listeners and change listeners
             setupListeners(changePasswordButton, deleteAccountButton, switchNotifications, 
-                    switchSound, switchVibration, dropdownMapType, switchTraffic, 
-                    dropdownLanguage, logoutButton);
+                    switchSound, switchVibration, 
+                    dropdownLanguage, logoutButton, contactSupportButton, sendFeedbackButton);
         } catch (Exception e) {
             Toast.makeText(this, "Error initializing settings: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
@@ -225,8 +226,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void setupListeners(Button changePasswordButton, Button deleteAccountButton,
                               SwitchMaterial switchNotifications, SwitchMaterial switchSound,
-                              SwitchMaterial switchVibration, AutoCompleteTextView dropdownMapType,
-                              SwitchMaterial switchTraffic, AutoCompleteTextView dropdownLanguage, Button logoutButton) {
+                              SwitchMaterial switchVibration, AutoCompleteTextView dropdownLanguage, Button logoutButton,
+                              Button contactSupportButton, Button sendFeedbackButton) {
         try {
             // Account Settings
             changePasswordButton.setOnClickListener(v -> {
@@ -249,21 +250,6 @@ public class SettingsActivity extends AppCompatActivity {
             switchVibration.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 saveSetting("notification_vibration", isChecked);
             });
-
-            // Map Settings
-            dropdownMapType.setAdapter(new ArrayAdapter<>(this, 
-                    android.R.layout.simple_dropdown_item_1line, MAP_TYPES));
-            dropdownMapType.setOnItemClickListener((parent, view, position, id) -> {
-                if (position >= 0 && position < MAP_TYPES.length) {
-                    saveSetting("map_type", position);
-                }
-            });
-
-            switchTraffic.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                saveSetting("show_traffic", isChecked);
-            });
-
-            // Removed: Theme Settings (dark mode)
 
             // Language Settings
             dropdownLanguage.setAdapter(new ArrayAdapter<>(this, 
@@ -288,11 +274,42 @@ public class SettingsActivity extends AppCompatActivity {
             // Logout
             logoutButton.setOnClickListener(v -> {
                 SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
-                prefs.edit().putBoolean("is_logged_in", false).apply();
-                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+                boolean isGoogleSignIn = prefs.getBoolean("google_sign_in", false);
+                
+                if (isGoogleSignIn) {
+                    // For Google users, show a confirmation dialog
+                    new AlertDialog.Builder(this)
+                            .setTitle("Sign Out")
+                            .setMessage("Are you sure you want to sign out of your Google account?")
+                            .setPositiveButton("Yes", (dialog, which) -> {
+                                // Sign out from Google
+                                LoginActivity.signOutGoogle(this);
+                                // Clear all user data
+                                prefs.edit().clear().apply();
+                                Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+                } else {
+                    // For regular users, just log out
+                    prefs.edit().putBoolean("is_logged_in", false).apply();
+                    Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            // Email Support Buttons
+            contactSupportButton.setOnClickListener(v -> {
+                EmailSupportService.openSupportEmail(this);
+            });
+
+            sendFeedbackButton.setOnClickListener(v -> {
+                showFeedbackDialog();
             });
         } catch (Exception e) {
             Toast.makeText(this, "Error setting up listeners: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -308,15 +325,6 @@ public class SettingsActivity extends AppCompatActivity {
                     .setChecked(sharedPreferences.getBoolean("notification_sound", true));
             ((SwitchMaterial) findViewById(R.id.switchVibration))
                     .setChecked(sharedPreferences.getBoolean("notification_vibration", true));
-
-            // Load map settings
-            int mapType = sharedPreferences.getInt("map_type", 0);
-            if (mapType >= 0 && mapType < MAP_TYPES.length) {
-                ((AutoCompleteTextView) findViewById(R.id.dropdownMapType))
-                        .setText(MAP_TYPES[mapType]);
-            }
-            ((SwitchMaterial) findViewById(R.id.switchTraffic))
-                    .setChecked(sharedPreferences.getBoolean("show_traffic", false));
 
             SwitchMaterial switchDarkMode = findViewById(R.id.switchDarkMode);
             switchDarkMode.setChecked(sharedPreferences.getBoolean("dark_mode", false));
@@ -356,6 +364,20 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void showChangePasswordDialog() {
         try {
+            // Check if user is signed in with Google
+            SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            boolean isGoogleSignIn = prefs.getBoolean("google_sign_in", false);
+            
+            if (isGoogleSignIn) {
+                // Show message for Google users
+                new androidx.appcompat.app.AlertDialog.Builder(this)
+                        .setTitle("Change Password")
+                        .setMessage("You are signed in with Google. To change your password, please go to your Google Account settings.")
+                        .setPositiveButton("OK", null)
+                        .show();
+                return;
+            }
+            
             View dialogView = getLayoutInflater().inflate(R.layout.dialog_change_password, null);
             androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(this)
                     .setTitle("Change Password")
@@ -402,7 +424,6 @@ public class SettingsActivity extends AppCompatActivity {
                     }
 
                     // Get stored password
-                    SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
                     String storedPassword = prefs.getString("password", "");
 
                     // Verify current password
@@ -426,9 +447,17 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void showDeleteAccountDialog() {
         try {
+            // Check if user is signed in with Google
+            SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            boolean isGoogleSignIn = prefs.getBoolean("google_sign_in", false);
+            
+            String message = isGoogleSignIn ? 
+                "Are you sure you want to delete your account? This will permanently remove all your data and cannot be undone. You will also be signed out of your Google account." :
+                "Are you sure you want to delete your account? This will permanently remove all your data and cannot be undone.";
+            
             new androidx.appcompat.app.AlertDialog.Builder(this)
                     .setTitle("Delete Account")
-                    .setMessage("Are you sure you want to delete your account? This will permanently remove all your data and cannot be undone.")
+                    .setMessage(message)
                     .setPositiveButton("Delete", (dialog, which) -> {
                         deleteAccount();
                     })
@@ -441,6 +470,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void deleteAccount() {
         try {
+            // Send account deletion confirmation email
+            EmailSupportService.sendAccountDeletionEmail(this);
+            
             // Clear all user preferences
             SharedPreferences userPrefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
             SharedPreferences.Editor userEditor = userPrefs.edit();
@@ -469,6 +501,35 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         } catch (Exception e) {
             Toast.makeText(this, "Error deleting account: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void showFeedbackDialog() {
+        try {
+            View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
+            android.widget.EditText feedbackInput = new android.widget.EditText(this);
+            feedbackInput.setHint("Enter your feedback here...");
+            feedbackInput.setMinLines(4);
+            feedbackInput.setGravity(android.view.Gravity.TOP | android.view.Gravity.START);
+
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Send Feedback")
+                    .setView(feedbackInput)
+                    .setPositiveButton("Send", (dialogInterface, i) -> {
+                        String feedback = feedbackInput.getText().toString().trim();
+                        if (!feedback.isEmpty()) {
+                            EmailSupportService.sendFeedbackEmail(this, feedback);
+                            Toast.makeText(this, "Feedback sent successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Please enter your feedback", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .create();
+
+            dialog.show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error showing feedback dialog: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }
