@@ -8,10 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +63,7 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 
 import java.util.concurrent.Executor;
+import android.content.Context;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -341,7 +344,11 @@ public class MainActivity extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) 
                     == PackageManager.PERMISSION_GRANTED) {
                 locationPermissionGranted = true;
-                saveLocation();
+                if (!isLocationEnabled()) {
+                    promptEnableLocation();
+                } else {
+                    saveLocation();
+                }
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                     showPermissionRationaleDialog();
@@ -508,7 +515,11 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 locationPermissionGranted = true;
-                saveLocation();
+                if (!isLocationEnabled()) {
+                    promptEnableLocation();
+                } else {
+                    saveLocation();
+                }
             } else {
                 Toast.makeText(this, R.string.location_permission_message, Toast.LENGTH_SHORT).show();
             }
@@ -617,18 +628,39 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        new AlertDialog.Builder(this)
-                .setTitle("Exit App")
-                .setMessage("Are you sure you want to exit?")
-                .setPositiveButton("Yes", (dialog, which) -> finish())
-                .setNegativeButton("No", null)
-                .show();
+        Fragment historyFragment = getSupportFragmentManager().findFragmentByTag("history");
+        if (historyFragment != null && historyFragment.isVisible()) {
+            if (bottomNavigation != null) {
+                bottomNavigation.setSelectedItemId(R.id.navigation_home);
+            }
+            showHomeFragment();
+        } else {
+            super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setTitle("Exit App")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes", (dialog, which) -> finish())
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (bottomNavigation != null) {
+            bottomNavigation.setSelectedItemId(R.id.navigation_home);
+        }
+        showHomeFragment();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (bottomNavigation != null) {
+            bottomNavigation.setSelectedItemId(R.id.navigation_home);
+        }
+        showHomeFragment();
         if (compassOverlay != null) {
             compassOverlay.enableCompass();
         }
@@ -760,5 +792,23 @@ public class MainActivity extends AppCompatActivity {
         // Close the circle
         points.add(points.get(0));
         return points;
+    }
+
+    private boolean isLocationEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+               locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    private void promptEnableLocation() {
+        new AlertDialog.Builder(this)
+            .setTitle("Enable Location")
+            .setMessage("Location services are disabled. Please enable location to use this feature.")
+            .setPositiveButton("Settings", (dialog, which) -> {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            })
+            .setNegativeButton("Cancel", null)
+            .show();
     }
 }
