@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "app_settings";
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+    private Executor executor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +158,12 @@ public class MainActivity extends AppCompatActivity {
 
             // Initialize SharedPreferences
             sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+            // Check if biometric is enabled in settings
+            boolean isBiometricEnabled = sharedPreferences.getBoolean("biometric_enabled", false);
+            if (isBiometricEnabled) {
+                showBiometricPrompt();
+            }
         } catch (Exception e) {
             showErrorAndFinish("Error initializing MainActivity: " + e.getMessage());   
         }
@@ -810,5 +819,32 @@ public class MainActivity extends AppCompatActivity {
             })
             .setNegativeButton("Cancel", null)
             .show();
+    }
+
+    private void showBiometricPrompt() {
+        executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                // Allow access to the app (do nothing, continue)
+            }
+            @Override
+            public void onAuthenticationError(int errorCode, CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                finish(); // Close app if not authenticated
+            }
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                // Optionally show a message
+            }
+        });
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Fingerprint Authentication")
+            .setSubtitle("Authenticate to access the app")
+            .setNegativeButtonText("Cancel")
+            .build();
+        biometricPrompt.authenticate(promptInfo);
     }
 }
