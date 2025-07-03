@@ -124,6 +124,10 @@
 
         <activity android:name=".OTPVerificationActivity" />
 
+        <activity android:name=".QrScannerActivity" />
+
+        <activity android:name=".ShowQRResultActivity" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

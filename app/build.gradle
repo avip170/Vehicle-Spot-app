@@ -98,4 +98,7 @@ dependencies {
 
     // Osmdroid
     implementation 'org.osmdroid:osmdroid-android:6.1.16'
+
+    // ZXing
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }

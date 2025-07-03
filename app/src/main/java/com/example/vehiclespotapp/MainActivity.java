@@ -64,6 +64,7 @@ import androidx.biometric.BiometricPrompt;
 
 import java.util.concurrent.Executor;
 import android.content.Context;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -544,6 +545,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.navigation_history) {
                 showHistoryFragment();
+                return true;
+            } else if (itemId == R.id.navigation_qr) {
+                Intent intent = new Intent(this, QrScannerActivity.class);
+                startActivity(intent);
                 return true;
             } else if (itemId == R.id.navigation_settings) {
                 // Launch SettingsActivity

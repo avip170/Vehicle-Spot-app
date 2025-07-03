@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/qr_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Camera Preview (ZXing) -->
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/barcode_scanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:zxing_use_texture_view="true" />
+
+    <!-- Overlay for scan box and label -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Top label -->
+        <TextView
+            android:id="@+id/qr_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan any QR"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/qr_label_bg"
+            android:padding="8dp"/>
+
+        <!-- Custom scan box overlay with curved purple corners -->
+        <View
+            android:id="@+id/qr_overlay_box"
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:layout_gravity="center"
+            android:background="@drawable/qr_scan_box_overlay" />
+
+        <!-- Bottom Upload QR button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="40dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_upload_qr"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_upload"
+                app:iconPadding="8dp"
+                android:text="Upload QR"
+                android:textAllCaps="false"
+                android:textColor="@color/purple_500"
+                app:iconTint="@color/purple_500"
+                app:strokeColor="@color/purple_500"
+                app:strokeWidth="2dp"
+                android:backgroundTint="@android:color/transparent"/>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout> 
